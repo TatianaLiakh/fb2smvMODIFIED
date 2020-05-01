@@ -1,35 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
 using FB2SMV.Core;
-using FB2SMV.FBCollections;
 
-namespace FB_to_nuSMV
+namespace CommandShell
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            string filename = args[0];
+            var filename = args[0];
+            var settings = new Settings();
+            var parser = new FBClassParcer(Console.WriteLine, settings);
+            parser.ParseRecursive(filename, Console.WriteLine);
 
-            FBClassParcer parcer = new FBClassParcer();
-            parcer.ParseRecursive(filename);
+            var executionModels = ExecutionModelsList.Generate(parser, true);
+            var translator = new SmvCodeGenerator(parser.Storage, executionModels, settings, Console.WriteLine);
 
-            var compositeBlocks = parcer.Storage.Types.Where((fbType) => fbType.Type == FBClass.Composite);
-            bool solveDispatchingProblem = true;
-            IEnumerable<IDispatcher> dispatchers = DispatchersCreator.Create(compositeBlocks, parcer.Storage.Instances, solveDispatchingProblem);
-            SmvCodeGenerator translator = new SmvCodeGenerator(parcer.Storage, dispatchers);
-
-            string outFileName = Path.Combine(Path.GetDirectoryName(filename), Path.GetFileNameWithoutExtension(filename) + ".smv");
-            StreamWriter wr = new StreamWriter(outFileName);
-            foreach (string fbSmv in translator.TranslateAll())
+            var outFileName = Path.Combine(Path.GetDirectoryName(filename),
+                Path.GetFileNameWithoutExtension(filename) + ".smv");
+            var wr = new StreamWriter(outFileName);
+            foreach (var fbSmv in translator.TranslateAll())
             {
                 wr.Write(fbSmv + "\n");
             }
+
             wr.Close();
         }
     }

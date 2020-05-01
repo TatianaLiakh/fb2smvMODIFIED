@@ -428,7 +428,7 @@ namespace FB2SMV
 
             private static string _translateEventNames(string str, IEnumerable<Event> events)
             {
-                Console.WriteLine("\n\n" + str);
+                // Console.WriteLine("\n\n" + str);
 
                 Regex evNamesRegex = new Regex(@"(\w+)");
 

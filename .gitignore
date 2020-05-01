@@ -174,3 +174,11 @@ UpgradeLog*.htm
 FakesAssemblies/
 
 doxygen/
+
+# IntelliJ
+source/.idea
+
+# macOS
+.DS_Store
+
+	
