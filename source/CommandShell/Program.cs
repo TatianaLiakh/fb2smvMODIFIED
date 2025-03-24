@@ -8,6 +8,14 @@ namespace CommandShell
     {
         private static void Main(string[] args)
         {
+            Console.WriteLine("Args Length: " + args.Length);
+            if (args.Length == 0)
+            {
+                args = new string[] { @"C:\testfb2\PnPControl17.fbt" };
+            }
+
+            Console.WriteLine("Input file: " + args[0]);
+
             var filename = args[0];
             var settings = new Settings();
             var parser = new FBClassParcer(Console.WriteLine, settings);

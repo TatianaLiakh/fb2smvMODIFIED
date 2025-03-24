@@ -23,7 +23,9 @@ namespace FB2SMV
 
         public class AlgorithmDecl
         {
-            [XmlAttribute] public string Text;
+            //[XmlAttribute] public string Text;
+            [XmlText]
+            public string Text { get; set; }
 
             public override string ToString()
             {

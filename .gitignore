@@ -181,4 +181,13 @@ source/.idea
 # macOS
 .DS_Store
 
+# Visual Studio project-specific folders
+.vs/
+source/.vs/
+
+# Launch profiles (optional - ignore if only used for local debugging)
+source/CommandShell/Properties/launchSettings.json
+
+# User-local config files (optional)
+source/CommandShell/app.config
 	

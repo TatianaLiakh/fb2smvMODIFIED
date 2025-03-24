@@ -79,7 +79,7 @@ namespace FB2SMV
                     try //TODO: replace with FaultCallbackDelegate()
                     {
                         ShowMessage("Loading file: " + filename);
-                        FB2SMV.FBXML.FBType fb = Deserialie(filename);
+                        FB2SMV.FBXML.FBType fb = Deserialise(filename);
                         PutClassToStorage(fb, elementIsRoot, ShowMessage);
                         filename = NextFileName(directory);
                         elementIsRoot = false;
@@ -92,7 +92,7 @@ namespace FB2SMV
 
             }
 
-            private FB2SMV.FBXML.FBType Deserialie(string filename)
+            private FB2SMV.FBXML.FBType Deserialise(string filename)
             {
                 XmlSerializer ser = new XmlSerializer(typeof (FB2SMV.FBXML.FBType), "");
                 StreamReader sr = new StreamReader(filename);
