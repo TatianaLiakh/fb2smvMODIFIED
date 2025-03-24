@@ -23,14 +23,15 @@ namespace FB2SMV
 
         public class AlgorithmDecl
         {
-            //[XmlAttribute] public string Text;
             [XmlText]
-            public string Text { get; set; }
+            public string Body { get; set; }
 
-            public override string ToString()
-            {
-                return Text;
-            }
+            [XmlAttribute("Text")]
+            public string InlineText { get; set; }
+
+            public string Text => !string.IsNullOrEmpty(InlineText) ? InlineText : Body;
+
+            public override string ToString() => Text;
         }
 
         public class Algorithm : NamedXmlDeclaration

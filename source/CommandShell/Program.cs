@@ -11,7 +11,7 @@ namespace CommandShell
             Console.WriteLine("Args Length: " + args.Length);
             if (args.Length == 0)
             {
-                args = new string[] { @"C:\testfb2\PnPControl17.fbt" };
+                args = new string[] { @"C:\testfb2\TwoCylDiscrMX.fbt" };
             }
 
             Console.WriteLine("Input file: " + args[0]);
